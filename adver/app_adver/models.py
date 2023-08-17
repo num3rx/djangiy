@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 # Create your models here.
 class Advertisements(models.Model):
@@ -8,6 +11,8 @@ class Advertisements(models.Model):
     auction = models.BooleanField("Торг", help_text="Отметьте, если торг уместен")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(User, verbose_name="пользователь", on_delete=models.CASCADE)
+    image = models.ImageField('Изображение', upload_to='')
 
 
     class Meta:
